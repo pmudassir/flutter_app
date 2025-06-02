@@ -8,9 +8,10 @@ void main() {
 // material app
 // scaffold
 
+String title = "Dynamic title";
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,17 +22,38 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
         ),
       ),
-      home: Scaffold(
-        appBar: AppBar(title: Text("Hello"), centerTitle: true),
-        floatingActionButton: FloatingActionButton(onPressed: () {}),
-        bottomNavigationBar: NavigationBar(
-          destinations: [
-            NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-            NavigationDestination(icon: Icon(Icons.person), label: "Profile"),
-          ],
-          onDestinationSelected: (int value) {},
-          selectedIndex: 1,
-        ),
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int currentIndex = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(title), centerTitle: true),
+      body: currentIndex == 0
+          ? Center(child: Text("Home page"))
+          : Center(child: Text("Profile page")),
+      bottomNavigationBar: NavigationBar(
+        destinations: [
+          NavigationDestination(icon: Icon(Icons.home), label: "Home"),
+          NavigationDestination(icon: Icon(Icons.person), label: "Profile"),
+        ],
+        onDestinationSelected: (int value) {
+          setState(() {
+            currentIndex = value;
+          });
+        },
+        selectedIndex: currentIndex,
       ),
     );
   }

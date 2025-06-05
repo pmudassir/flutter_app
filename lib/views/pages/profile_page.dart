@@ -12,6 +12,7 @@ class _ProfilePageState extends State<ProfilePage> {
   bool? isChecked = false;
   bool isSwitched = false;
   double sliderValue = 0.0;
+  String? menuItem = "Item 1";
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,19 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            DropdownButton(
+              value: menuItem,
+              items: [
+                DropdownMenuItem(value: "Item 1", child: Text("Item 1")),
+                DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
+                DropdownMenuItem(value: "Item 3", child: Text("Item 3")),
+              ],
+              onChanged: (String? value) {
+                setState(() {
+                  menuItem = value;
+                });
+              },
+            ),
             TextField(
               controller: controller,
               decoration: InputDecoration(
@@ -86,11 +100,25 @@ class _ProfilePageState extends State<ProfilePage> {
                 print("Image selected");
               },
               child: Container(
-                height: 200,
+                height: 50,
                 width: double.infinity,
                 color: Colors.white12,
               ),
             ),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.teal,
+                foregroundColor: Colors.white,
+              ),
+              child: Text('Click Me'),
+            ),
+            ElevatedButton(onPressed: () {}, child: Text('Click Me')),
+            FilledButton(onPressed: () {}, child: Text('Click Me')),
+            TextButton(onPressed: () {}, child: Text('Click Me')),
+            OutlinedButton(onPressed: () {}, child: Text('Click Me')),
+            CloseButton(),
+            BackButton(),
           ],
         ),
       ),

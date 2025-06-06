@@ -5,6 +5,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Home page"));
+    return Padding(padding: EdgeInsets.all(20.0), child: Column());
   }
 }
